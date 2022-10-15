@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.layouts {
+    background-color: #27272A;
+    color: #A1A1AA;
+    min-height: 100vh;
+}
+
+.top-menu {
+    border-bottom: 1px solid #414144;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 18px;
+    padding: 8px 0;
+    height: 4vh;
+}
+
+.top-menu ul {
+    display: flex;
+}
+
+.top-left-menu-list li {
+    margin: auto 0 auto 24px;
+}
+
+.top-right-menu-list li {
+    margin: auto 8px auto 0;
+}
+
+.avatar {
+    padding: 0 8px;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+.left-menu {
+    border-right: 1px solid #414144;
+    font-size: 14px;
+    min-width: 16vw;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    min-height: 93vh;
+}
+
+.left-menu-title {
+    border-bottom: 1px solid #414144;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subtitle {
+    font-size: 10px;
+}
+
+.left-menu-title div {
+    padding: 0 20px;
+}
+
+.left-menu-title span {
+    margin: auto 13px auto 0;
+    color: white;
+}
+
+.left-menu-title div p {
+    margin: 0;
+}
+
+.list-icon {
+    margin: 0 20px;
+    font-size: 16px;
+}
+
+.left-menu ul li {
+    padding: 6px 0;
+    color: white;
+}
+
+.selected {
+    background-color: #A1A1AA;
+}
+
+.left-menu-title {
+    height: 4vh;
+    padding: 8px 0;
+}
+
+.content-title {
+    border-bottom: 1px solid #414144;
+    text-align: start;
+    background-color: #27272A;
+}
+
+.content-title div {
+    border-right: 1px solid #414144;
+    font-size: 18px;
+    height: 4vh;
+    padding: 8px 15px;
+    color: white;
+    width: 25vw;
+}
+
+.content {
+    min-width: 83vw;
+    min-height: 93vh;
+    background-color: #202124;
+}
+
+.table {
+    min-width: 83vw;
+    margin: 10px;
+}
+
+.table-header {
+    padding-bottom: 12px;
+}
+
+.table-grid {
+    display: grid;
+    grid-template-columns: 2fr 7fr 2fr 2fr 2fr 2fr;
+    border-bottom: 1px solid #414144;
+}
+
+.table-grid div {
+    padding-left: 12px;
+}
+
+.table-row {
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+form div {
+    padding: 0 12px 0 12px;
+}
+
+input {
+    width: 100%;
+    background-color: #202124;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border-style: none;
+    border: 1px solid #414144;
+    border-radius: 6px;
+    color: #A1A1AA;
+    }
