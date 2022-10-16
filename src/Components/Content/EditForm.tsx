@@ -4,45 +4,55 @@ import {EditFormProps, EditFormState} from "./ContentTypes";
 import {connect} from 'react-redux';
 import {changeRows} from "../../store/rootReducer";
 import store from "../../store/store";
-import { saveRow } from "../../MustHaveCode";
+import { editRow, saveRow } from "../../MustHaveCode";
 
 class EditForm extends React.Component<EditFormProps, EditFormState> {
     constructor(props: EditFormProps) {
         super(props);
+
+        const item = props.currentRow;
+
+        this.state = {
+            title: item?.title ? item.title : null,
+            unit: item?.unit ? item.unit : null,
+            quantity: item?.quantity ? item.quantity : null,
+            unitPrice: item?.unitPrice ? item.unitPrice : null,
+        }
     }
 
     onSubmit = () => {
         const form = document.forms['editRow'];
         const data: any = {};
+        const roundPrice = (x: number) => Math.round(x*100)/100;
+        const {rows, currentRow} = this.props;
 
-        data.title = form?.title?.value ? form.title?.value : "Нет данных";
-        data.unit = form?.unit?.value ? form.unit?.value : "Нет данных";
-        data.quantity = form?.quantity?.value ? form.quantity?.value : "Нет данных";
-        data.unitPrice = form?.unitPrice?.value ? form.unitPrice?.value : "Нет данных";
+        data.title = form?.title?.value ? form.title.value : "Нет данных";
+        data.unit = form?.unit?.value ? form.unit.value : "Нет данных";
+        data.quantity = form?.quantity?.value ? roundPrice(form.quantity.value) : "Нет данных";
+        data.unitPrice = form?.unitPrice?.value ? roundPrice(form.unitPrice.value) : "Нет данных";
 
         data.type = 'row';
         data.parent = null;
+        if (currentRow) data.id = currentRow.id;
 
-        if (typeof parseFloat(data.quantity) === 'number' && typeof parseFloat(data.unitPrice) === 'number') {
-            data.price = data.quantity * data.unitPrice;
-        } else {
+        if (isNaN(data.quantity*data.unitPrice)) {
             data.price = "Нет данных";
+        } else {
+            data.price = roundPrice(data.quantity*data.unitPrice);
         }
 
-        const {rows} = this.props;
-        
-        const storage = rows ? rows : [];
-        const newRow = saveRow(data, storage);
-        
-        if (rows === null) {
-            store.dispatch(changeRows([newRow.current]));
-        } else {
-            store.dispatch(changeRows([...rows, newRow.current]));
-        }
+        const storage = rows ? [...rows] : [];
+
+        currentRow ? editRow(data, storage) : saveRow(data, storage);
+
+        store.dispatch(changeRows(storage));
+
+        if (this.props.onFinish) this.props.onFinish();
     }
 
     render() {
         const {type} = this.props;
+        const {unit, unitPrice, quantity, title} = this.state;
 
         return (
             <form className="table-grid table-row" name="editRow">
@@ -53,6 +63,7 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
                         onKeyDown={(e)=>{
                             if (e.key === 'Enter') this.onSubmit();
                         }}
+                        defaultValue={title ? title : undefined}
                     />
                 </div>
                 <div>
@@ -62,6 +73,7 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
                             onKeyDown={(e)=>{
                                 if (e.key === 'Enter') this.onSubmit();
                             }}
+                            defaultValue={unit ? unit : undefined}
                         />
                     }
                 </div>
@@ -73,6 +85,7 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
                                 if (e.key === 'Enter') this.onSubmit();
                             }}
                             type="number"
+                            defaultValue={quantity ? quantity : undefined}
                         />
                     }
                 </div>
@@ -84,6 +97,7 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
                                 if (e.key === 'Enter')  this.onSubmit();
                             }}
                             type="number"
+                            defaultValue={unitPrice ? unitPrice : undefined}
                         />
                     }
                 </div>
