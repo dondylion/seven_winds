@@ -28,15 +28,15 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
 
         data.title = form?.title?.value ? form.title.value : "Нет данных";
         data.unit = form?.unit?.value ? form.unit.value : "Нет данных";
-        data.quantity = form?.quantity?.value ? roundPrice(form.quantity.value) : "Нет данных";
-        data.unitPrice = form?.unitPrice?.value ? roundPrice(form.unitPrice.value) : "Нет данных";
+        data.quantity = form?.quantity?.value ? roundPrice(form.quantity.value) : 0;
+        data.unitPrice = form?.unitPrice?.value ? roundPrice(form.unitPrice.value) : 0;
 
         data.type = 'row';
         data.parent = null;
         if (currentRow) data.id = currentRow.id;
 
         if (isNaN(data.quantity*data.unitPrice)) {
-            data.price = "Нет данных";
+            data.price = 0;
         } else {
             data.price = roundPrice(data.quantity*data.unitPrice);
         }
