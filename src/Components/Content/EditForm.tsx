@@ -24,15 +24,15 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
         const form = document.forms['editRow'];
         const data: any = {};
         const roundPrice = (x: number) => Math.round(x*100)/100;
-        const {rows, currentRow} = this.props;
+        const {rows, currentRow, type} = this.props;
 
         data.title = form?.title?.value ? form.title.value : "Нет данных";
         data.unit = form?.unit?.value ? form.unit.value : "Нет данных";
         data.quantity = form?.quantity?.value ? roundPrice(form.quantity.value) : 0;
         data.unitPrice = form?.unitPrice?.value ? roundPrice(form.unitPrice.value) : 0;
 
-        data.type = 'row';
-        data.parent = null;
+        data.type = type;
+        data.parent = this.props?.parent ? this.props.parent : null;
         if (currentRow) data.id = currentRow.id;
 
         if (isNaN(data.quantity*data.unitPrice)) {
@@ -47,16 +47,16 @@ class EditForm extends React.Component<EditFormProps, EditFormState> {
 
         store.dispatch(changeRows(storage));
 
-        if (this.props.onFinish) this.props.onFinish();
+        this.props.onFinish(storage);
     }
 
     render() {
-        const {type} = this.props;
+        const {type, icon} = this.props;
         const {unit, unitPrice, quantity, title} = this.state;
 
         return (
             <form className="table-grid table-row" name="editRow">
-                <div><AiFillFileText/></div>
+                <div>{icon}</div>
                 <div>
                     <input
                         name="title"

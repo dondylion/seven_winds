@@ -14,15 +14,19 @@ export declare type ContentProps = {
 }
 
 export declare type ContentState = {
-    editMode: boolean;
     editedElement: number | null;
+    coveredIcon: number | null;
+    createdElement: 'row' | 'firstLevel' | 'secondLevel';
+    editMode: boolean;
 }
 
 export declare type EditFormProps = {
     type: 'level' | 'row';
     currentRow: Row | null;
     rows: Array<Row> | null;
-    onFinish?: Function;
+    onFinish: Function;
+    icon: any;
+    parent?: number;
 }
 
 export declare type EditFormState = {

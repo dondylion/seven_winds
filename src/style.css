@@ -141,13 +141,11 @@ ul {
 }
 
 .table-grid div {
-    padding-left: 12px;
+    padding: 6px 0 6px 12px;
 }
 
 .table-row {
     color: white;
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 
 form div {
@@ -167,4 +165,20 @@ input {
     border: 1px solid #414144;
     border-radius: 6px;
     color: #A1A1AA;
+}
+
+.select-level {
+    background-color: #414144;
+    border-radius: 6px;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    width: min-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+.level-icon {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 3px;
 }
